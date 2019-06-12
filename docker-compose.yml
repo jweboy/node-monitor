@@ -1,0 +1,17 @@
+# version: "2"
+# services:
+#     app:
+#         container_name: app
+#         restart: always
+#         build: .
+#         ports:
+#             - "4002:4002"
+#         links:
+#             - mongo
+#     mongo:
+#         container_name: mongo
+#         image: mongo
+#         volumes:
+#             - ~/Database:/data/db
+#         ports:
+#             - "27017:27017"

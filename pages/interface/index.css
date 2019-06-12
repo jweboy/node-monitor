@@ -1,0 +1,12 @@
+.container{
+    padding: 20px;
+}
+.detail{
+    margin-top: 10px;
+}
+.browser{
+    width: 100px;
+}
+.message{
+    word-break: break-all;
+}

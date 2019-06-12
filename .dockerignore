@@ -1,0 +1,8 @@
+.history/
+.vscode/
+.next/
+
+node_modules/
+
+*.log
+*.lock

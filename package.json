@@ -1,0 +1,54 @@
+{
+  "name": "react-webpack-toolkit",
+  "version": "0.0.3",
+  "main": "src/index.js",
+  "description": "react和webpack的脚手架工具",
+  "repository": {
+    "url": "https://github.com/jweboy/react-webpack-toolkit"
+  },
+  "author": "jweboy",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "webpack",
+    "es6"
+  ],
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0-beta.44",
+    "@koa/cors": "^3.0.0",
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-less": "^1.0.1",
+    "antd": "^3.19.3",
+    "autoprefixer": "^8.4.1",
+    "cors": "^2.8.5",
+    "dayjs": "^1.8.14",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.5.14",
+    "next": "^8.1.0",
+    "ora": "^2.0.0",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.44",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.44",
+    "@babel/preset-env": "^7.0.0-beta.44",
+    "@babel/preset-react": "^7.0.0-beta.44",
+    "babel-eslint": "8",
+    "babel-loader": "^8.0.0-beta",
+    "babel-plugin-import": "^1.12.0",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^4.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.7.0",
+    "less": "^3.9.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "next",
+    "build": "next build",
+    "lint": "eslint --ext .js --ext .jsx src --fix"
+  }
+}
