@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Descriptions, Button, Icon } from 'antd';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
-// import { format } from 'jweboy-utils/lib/date-time';
-import dayjs from 'dayjs';
+import 'antd/dist/antd.css';
 import './index.css';
 
 const DescriptionItem = Descriptions.Item;
@@ -45,7 +44,6 @@ class InterfaceDetail extends Component {
     				<DescriptionItem label="请求方法">{data.method}</DescriptionItem>
     				<DescriptionItem label="状态码">{data.code}</DescriptionItem>
     				<DescriptionItem label="请求路径">{data.url}</DescriptionItem>
-    				{/* <DescriptionItem label="创建时间">{format(data.createAt, 'time').fmtData}</DescriptionItem> */}
     				<DescriptionItem label="创建时间">{dayjs(data.createAt).format('YYYY-MM-DD HH:mm:ss')}</DescriptionItem>
     				<DescriptionItem label="浏览器">
     					<div className="browser">{data.browser}</div>
