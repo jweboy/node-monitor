@@ -5,9 +5,18 @@ const bodyParser = require('koa-bodyparser');
 const mongoose = require('mongoose');
 const cors = require('@koa/cors');
 const { createReport, reportList, reportDetail } = require('./models/api-report');
+const Ora = require('ora');
+const chalk = require('chalk');
+const logger = require('./logger');
 
 const app = next({ dev: true });
 const reqHandler = app.getRequestHandler();
+const spinner = new Ora();
+const PORT = 4002 || process.env.PORT;
+const PROTOCOL = 'http' || process.env.PROTOCOL;
+const DOMAIN = 'localhost' || process.env.DOMAIN;
+const DB_URL = 'mongodb://localhost:27017/monitor';
+
 
 app.prepare().then(() => {
 	const server = new Koa();
@@ -29,9 +38,13 @@ app.prepare().then(() => {
 
 	router.post('/report', async (ctx) => {
 		const { body } = ctx.request;
-		console.log(body);
+		const { info , ...restProps } = body;
 
-		ctx.body = await createReport(body);
+		logger.error(JSON.stringify(body));
+		ctx.body = await createReport({
+			...restProps,
+			info: JSON.stringify(info),
+		});
 	});
 
 	router.get('/', async (ctx) => {
@@ -45,24 +58,26 @@ app.prepare().then(() => {
 		ctx.respond = false;
 	});
 
-	server.use(bodyParser());
-	server.use(cors());
-	server.use(router.routes());
-
 	// connect database
-	mongoose.connect('mongodb://localhost:27017/monitor', {
+	mongoose.connect(DB_URL, {
 		useNewUrlParser: true, // 新解析器中发现错误就回退到旧解析器
 	}).then(() => {
-		console.log('Database connection is successful.');
+		logger.info('Database connection is successful.');
+		spinner.succeed(chalk.green('Database connection is successful.'));
 	}).catch((err) => {
-		console.log(`Database connection is failed: ${err.message}`);
+		spinner.fail(chalk.red(err.message));
 		process.exit(1);
 	});
 
 	// connect server
-	server.listen(4002, () => {
-		console.log('Server is running at http://localhost:4002');
-	});
+	server
+		.use(bodyParser())
+		.use(cors())
+		.use(router.routes())
+		.listen(PORT, () => {
+			logger.info(`Server is running at ${PROTOCOL}://${DOMAIN}:${PORT}`);
+			spinner.succeed(chalk.green(`Server is running at ${PROTOCOL}://${DOMAIN}:${PORT}`));
+		});
 });
 
 process.on('unhandledRejection', err => {
