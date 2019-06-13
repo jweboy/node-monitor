@@ -1,7 +1,7 @@
+import React from 'react';
 import { Table } from 'antd';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
-import 'antd/dist/antd.css';
 import { columns } from './config';
 
 class APIPage extends React.Component {
