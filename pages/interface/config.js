@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import { format } from 'jweboy-utils/lib/date-time'
 
 export const columns = [
     {
@@ -22,7 +22,7 @@ export const columns = [
         dataIndex: 'createAt',
         render(value) {
             return (
-                <span>{dayjs(value).format('YYYY-MM-DD HH:mm:ss')}</span>
+                <span>{format(value, 'time').fmtData}</span>
             )
         },
     }

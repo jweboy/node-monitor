@@ -7,7 +7,7 @@ const cors = require('@koa/cors');
 const { createReport, reportList, reportDetail } = require('./models/api-report');
 const Ora = require('ora');
 const chalk = require('chalk');
-const logger = require('./logger');
+const { logger } = require('jweboy-utils');
 
 const app = next({ dev: true });
 const reqHandler = app.getRequestHandler();
