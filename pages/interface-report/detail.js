@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Descriptions, Button, Icon } from 'antd';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
-import 'antd/dist/antd.css';
+// import { format } from 'jweboy-utils/lib/date-time';
+import dayjs from 'dayjs';
 import './index.css';
 
 const DescriptionItem = Descriptions.Item;
