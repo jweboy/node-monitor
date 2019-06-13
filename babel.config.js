@@ -5,7 +5,8 @@ module.exports = {
 		[
             "import",
             {
-                libraryName: 'antd'
+                libraryName: 'antd',
+                style: 'css'
             }
         ],
 	],
