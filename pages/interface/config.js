@@ -1,4 +1,6 @@
-import { format } from 'jweboy-utils/lib/date-time'
+// import { dateTime } from 'jweboy-utils'
+// const { format } = dateTime
+import dayjs from 'dayjs'
 
 export const columns = [
     {
@@ -22,25 +24,8 @@ export const columns = [
         dataIndex: 'createAt',
         render(value) {
             return (
-                <span>{format(value, 'time').fmtData}</span>
+                <span>{dayjs(value).format('YYYY-MM-DD  HH:mm:ss')}</span>
             )
         },
-    }
-]
-
-export const a = x => x
-
-export const testData = [
-    {
-        method: 'POST',
-        url: '/school',
-        createTime: new Date().toLocaleString(),
-        id: 0,
-    },
-    {
-        method: 'GET',
-        url: '/newMessage',
-        createTime: new Date().toLocaleString(),
-        id: 1,
     }
 ]

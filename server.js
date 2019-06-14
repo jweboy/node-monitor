@@ -4,10 +4,11 @@ const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
 const mongoose = require('mongoose');
 const cors = require('@koa/cors');
-const { createReport, reportList, reportDetail } = require('./models/api-report');
 const Ora = require('ora');
 const chalk = require('chalk');
 const { logger } = require('jweboy-utils');
+const { createReport, reportList, reportDetail } = require('./models/api-report');
+const { url: databaseUrl } = require('./config/databse');
 
 const app = next({ dev: true });
 const reqHandler = app.getRequestHandler();
@@ -15,8 +16,6 @@ const spinner = new Ora();
 const PORT = 4002 || process.env.PORT;
 const PROTOCOL = 'http' || process.env.PROTOCOL;
 const DOMAIN = 'localhost' || process.env.DOMAIN;
-const DB_URL = 'mongodb://localhost:27017/monitor';
-
 
 app.prepare().then(() => {
 	const server = new Koa();
@@ -59,7 +58,7 @@ app.prepare().then(() => {
 	});
 
 	// connect database
-	mongoose.connect(DB_URL, {
+	mongoose.connect(databaseUrl, {
 		useNewUrlParser: true, // 新解析器中发现错误就回退到旧解析器
 	}).then(() => {
 		logger.info('Database connection is successful.');
