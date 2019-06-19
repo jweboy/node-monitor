@@ -3,6 +3,7 @@ import { Table } from 'antd';
 import Router from 'next/router';
 import PropTypes from 'prop-types';
 import { columns } from './config';
+import Layout from '../../components/Layout'
 
 class APIPage extends React.Component {
 	constructor(props) {
@@ -29,7 +30,7 @@ class APIPage extends React.Component {
     	/* eslint-disable */
     	const { url } = this.props;
 
-    	Router.replace(`${url.asPath}/detail/${record.id}`);
+    	Router.replace(`${url.asPath}/${record.id}`);
     }
     render() {
     	const { data } = this.props;
@@ -37,7 +38,9 @@ class APIPage extends React.Component {
 
     	return (
     		<div className="container">
-    			<Table columns={columns} dataSource={data} rowKey="id" onRow={this.onRow} />
+                <Layout>
+				    <Table columns={columns} dataSource={data} rowKey="id" onRow={this.onRow} />
+                </Layout>
     		</div>
     	);
     }
