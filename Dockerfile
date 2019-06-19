@@ -1,13 +1,13 @@
-FROM node:8
+FROM mhart/alpine-node
 
-WORKDIR /usr/app/node-monitor
-
-COPY package*.json ./
-
-RUN npm install -d --registry=https://registry.npm.taobao.org
-
+WORKDIR /app
 COPY . .
 
-EXPOSE 4002
+# RUN yarn install
+# RUN yarn build
 
-CMD ["npm", "start"]
+RUN npm install -d --registry=https://registry.npm.taobao.org --no-cache
+RUN npm run build
+
+# EXPOSE 3000
+CMD ["yarn", "start"]

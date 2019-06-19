@@ -1,8 +1,5 @@
-.history/
-.vscode/
-.next/
+.next
+.history
+node_modules
 
-node_modules/
-
-*.log
-*.lock
+Dockerfile

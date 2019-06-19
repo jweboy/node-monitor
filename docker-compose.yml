@@ -1,17 +1,27 @@
-# version: "2"
-# services:
-#     app:
-#         container_name: app
-#         restart: always
-#         build: .
-#         ports:
-#             - "4002:4002"
-#         links:
-#             - mongo
-#     mongo:
-#         container_name: mongo
-#         image: mongo
-#         volumes:
-#             - ~/Database:/data/db
-#         ports:
-#             - "27017:27017"
+version: "3"
+services:
+    monitor:
+        container_name: node-monitor
+        restart: always
+        build: .
+        ports:
+            - "4003:4003"
+        links:
+            - database
+        depends_on:
+            - database
+        networks:
+            - network-connect-middleware
+    database:
+        container_name: mongodb
+        image: mongo
+        restart: always
+        volumes:
+            - ~/Database:/data/db
+        ports:
+            - "27017:27017"
+        networks:
+            - network-connect-middleware
+networks:
+    network-connect-middleware:
+        driver: bridge

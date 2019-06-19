@@ -4,4 +4,4 @@ build-image:
 
 run-container:
 	@echo "============= docker run local container ============="
-	docker run -p 4002:4002 -d --name node-monitor jweboy/node-monitor
+	docker run -p 4004:4004 -d --name node-monitor  --network network-connect-middleware jweboy/node-monitor
