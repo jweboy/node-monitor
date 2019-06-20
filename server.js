@@ -7,7 +7,7 @@ const cors = require('@koa/cors');
 const Ora = require('ora');
 const chalk = require('chalk');
 const { logger } = require('jweboy-utils');
-const { createReport, reportList, reportDetail } = require('./models/api-report');
+const { createReport, reportList, reportDetail, performanceList } = require('./models/interface');
 
 require('dotenv').config();
 
@@ -22,6 +22,13 @@ const DBURL = `mongodb://${process.env.DB_HOST}:27017/monitor`;
 app.prepare().then(() => {
 	const server = new Koa();
 	const router = new Router();
+
+	router.get('/interface/performance', async (ctx) => {
+		const list = await performanceList();
+
+		await app.render(ctx.req, ctx.res, '/interface-performance/list', list);
+		ctx.respond = false;
+	});
 
 	router.get('/interface/report', async (ctx) => {
 		const list = await reportList();
@@ -39,12 +46,17 @@ app.prepare().then(() => {
 
 	router.post('/report/api', async (ctx) => {
 		const { body } = ctx.request;
-		const { info , ...restProps } = body;
+		const { type, info , ...restProps } = body;
+		const logMap = {
+			performance: 'info',
+			report: 'error',
+		};
 
-		logger.error(JSON.stringify(body));
+		logger[logMap[type]](JSON.stringify(body));
 		ctx.body = await createReport({
 			...restProps,
 			info: JSON.stringify(info),
+			type,
 		});
 	});
 
