@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 // const { publicRuntimeConfig } = getConfig()
 
-export default class extends React.Component {
+export default class App extends React.Component {
 	static async getInitialProps () {
 		// fetch(`${API_URL}/some-path`)
 		return {};

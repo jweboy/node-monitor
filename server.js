@@ -11,7 +11,7 @@ const { createReport, reportList, reportDetail } = require('./models/api-report'
 
 require('dotenv').config();
 
-const app = next({ dev: process.env.NODE_ENV === 'production' });
+const app = next({ dev: process.env.NODE_ENV === 'development' });
 const reqHandler = app.getRequestHandler();
 const spinner = new Ora();
 const PORT = 4004 || process.env.PORT;
@@ -23,14 +23,14 @@ app.prepare().then(() => {
 	const server = new Koa();
 	const router = new Router();
 
-	router.get('/dashboard/interface/report', async (ctx) => {
+	router.get('/interface/report', async (ctx) => {
 		const list = await reportList();
 
 		await app.render(ctx.req, ctx.res, '/interface-report/list', list);
 		ctx.respond = false;
 	});
 
-	router.get('/dashboard/interface/report/:id', async (ctx) => {
+	router.get('/interface/report/:id', async (ctx) => {
 		const { id } = ctx.params;
 		const detail = await reportDetail(id);
 		await app.render(ctx.req, ctx.res, '/interface-report/detail', detail);
@@ -47,15 +47,6 @@ app.prepare().then(() => {
 			info: JSON.stringify(info),
 		});
 	});
-
-	// router.post('/report/api/performance', async (ctx) => {
-	// 	const { body } = ctx.request;
-	// 	logger.info(JSON.stringify(body));
-	// 	ctx.body = await createReport({
-	// 		...restProps,
-	// 		info: JSON.stringify(info),
-	// 	});
-	// });
 
 	router.get('/', async (ctx) => {
 		await app.render(ctx.req, ctx.res, '/home');

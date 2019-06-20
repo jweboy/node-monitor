@@ -1,15 +1,14 @@
 import React from 'react';
-import Link from 'next/link';
+// import Link from 'next/link';
 import Router from 'next/router';
-import { Breadcrumb } from 'antd';
-import 'antd/dist/antd.css';
+// import { Breadcrumb } from 'antd';
 
 class App extends React.Component {
 	componentDidMount() {
-		// Router.push('/dashboard/interface/report');
+		Router.push('/interface/report');
 	}
 	render() {
-		return <div>hello</div>;
+		return null;
 	}
 }
 
