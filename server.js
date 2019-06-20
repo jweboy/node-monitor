@@ -13,7 +13,7 @@ const { url: databaseUrl } = require('./config/databse');
 const app = next({ dev: true });
 const reqHandler = app.getRequestHandler();
 const spinner = new Ora();
-const PORT = 4002 || process.env.PORT;
+const PORT = 4004 || process.env.PORT;
 const PROTOCOL = 'http' || process.env.PROTOCOL;
 const DOMAIN = 'localhost' || process.env.DOMAIN;
 
@@ -21,21 +21,21 @@ app.prepare().then(() => {
 	const server = new Koa();
 	const router = new Router();
 
-	router.get('/dashboard/interface', async (ctx) => {
+	router.get('/dashboard/interface/report', async (ctx) => {
 		const list = await reportList();
 
-		await app.render(ctx.req, ctx.res, '/interface/list', list);
+		await app.render(ctx.req, ctx.res, '/interface-report/list', list);
 		ctx.respond = false;
 	});
 
-	router.get('/dashboard/interface/detail/:id', async (ctx) => {
+	router.get('/dashboard/interface/report/:id', async (ctx) => {
 		const { id } = ctx.params;
 		const detail = await reportDetail(id);
-		await app.render(ctx.req, ctx.res, '/interface/detail', detail);
+		await app.render(ctx.req, ctx.res, '/interface-report/detail', detail);
 		ctx.respond = false;
 	});
 
-	router.post('/report', async (ctx) => {
+	router.post('/report/api', async (ctx) => {
 		const { body } = ctx.request;
 		const { info , ...restProps } = body;
 
@@ -45,6 +45,15 @@ app.prepare().then(() => {
 			info: JSON.stringify(info),
 		});
 	});
+
+	// router.post('/report/api/performance', async (ctx) => {
+	// 	const { body } = ctx.request;
+	// 	logger.info(JSON.stringify(body));
+	// 	ctx.body = await createReport({
+	// 		...restProps,
+	// 		info: JSON.stringify(info),
+	// 	});
+	// });
 
 	router.get('/', async (ctx) => {
 		await app.render(ctx.req, ctx.res, '/home');

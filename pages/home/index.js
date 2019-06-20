@@ -1,25 +1,15 @@
 import React from 'react';
-import Link from 'next/Link';
+import Link from 'next/link';
 import Router from 'next/router';
 import { Breadcrumb } from 'antd';
 import 'antd/dist/antd.css';
-import Layout from '../../components/layout';
 
 class App extends React.Component {
 	componentDidMount() {
-		Router.push('/dashboard/interface');
+		// Router.push('/dashboard/interface/report');
 	}
 	render() {
-		return (
-			<Layout>
-				<Breadcrumb>
-					<Breadcrumb.Item>home</Breadcrumb.Item>
-					<Breadcrumb.Item>
-						<Link href="/dashboard/interface">api</Link>
-					</Breadcrumb.Item>
-				</Breadcrumb>
-			</Layout>
-		);
+		return <div>hello</div>;
 	}
 }
 

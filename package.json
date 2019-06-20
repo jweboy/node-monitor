@@ -13,22 +13,26 @@
     "nextjs",
     "mongo"
   ],
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "NODE_ENV=production nodemon server.js"
+  },
   "dependencies": {
-    "@koa/cors": "^3.0.0",
-    "@zeit/next-css": "^1.0.1",
-    "@zeit/next-less": "^1.0.1",
-    "antd": "^3.19.3",
-    "autoprefixer": "^8.4.1",
-    "dayjs": "^1.8.14",
-    "koa": "^2.7.0",
-    "koa-bodyparser": "^4.2.1",
-    "koa-router": "^7.4.0",
-    "mongoose": "^5.5.14",
-    "next": "^8.1.0",
-    "ora": "^2.0.0",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
-    "winston": "^3.2.1"
+    "@koa/cors": "3.0.0",
+    "@zeit/next-css": "1.0.1",
+    "antd": "3.19.6",
+    "chalk": "2.4.2",
+    "jweboy-utils": "0.0.6",
+    "koa": "2.7.0",
+    "koa-bodyparser": "4.2.1",
+    "koa-router": "7.4.0",
+    "mongoose": "5.6.0",
+    "next": "latest",
+    "nodemon": "1.19.1",
+    "ora": "3.4.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.44",
@@ -37,13 +41,6 @@
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.7.0",
-    "less": "^3.9.0"
-  },
-  "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "build": "next build",
-    "lint": "eslint --ext .js --ext .jsx src --fix"
+    "eslint-plugin-react": "^7.7.0"
   }
 }
