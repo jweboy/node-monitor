@@ -9,5 +9,8 @@ COPY . .
 RUN npm install -d --registry=https://registry.npm.taobao.org --no-cache
 RUN npm run build
 
+ENV NODE_ENV=production
+ENV DB_HOST=mongo-service
+
 # EXPOSE 3000
-CMD ["yarn", "start"]
+CMD ["npm", "start"]

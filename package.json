@@ -14,15 +14,17 @@
     "mongo"
   ],
   "scripts": {
-    "dev": "next",
+    "serve": "nodemon server.js",
     "build": "next build",
-    "start": "NODE_ENV=production nodemon server.js"
+    "start": "node server.js",
+    "dev": "npm run build && npm run dev"
   },
   "dependencies": {
     "@koa/cors": "3.0.0",
     "@zeit/next-css": "1.0.1",
     "antd": "3.19.6",
     "chalk": "2.4.2",
+    "dotenv-webpack": "^1.7.0",
     "jweboy-utils": "0.0.6",
     "koa": "2.7.0",
     "koa-bodyparser": "4.2.1",

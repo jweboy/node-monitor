@@ -8,14 +8,16 @@ const Ora = require('ora');
 const chalk = require('chalk');
 const { logger } = require('jweboy-utils');
 const { createReport, reportList, reportDetail } = require('./models/api-report');
-const { url: databaseUrl } = require('./config/databse');
 
-const app = next({ dev: true });
+require('dotenv').config();
+
+const app = next({ dev: process.env.NODE_ENV === 'production' });
 const reqHandler = app.getRequestHandler();
 const spinner = new Ora();
 const PORT = 4004 || process.env.PORT;
 const PROTOCOL = 'http' || process.env.PROTOCOL;
 const DOMAIN = 'localhost' || process.env.DOMAIN;
+const DBURL = `mongodb://${process.env.DB_HOST}:27017/monitor`;
 
 app.prepare().then(() => {
 	const server = new Koa();
@@ -67,7 +69,7 @@ app.prepare().then(() => {
 	});
 
 	// connect database
-	mongoose.connect(databaseUrl, {
+	mongoose.connect(DBURL, {
 		useNewUrlParser: true, // 新解析器中发现错误就回退到旧解析器
 	}).then(() => {
 		logger.info('Database connection is successful.');

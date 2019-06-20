@@ -2,7 +2,3 @@
 # node_modules/*
 
 # Ignore build files
-build/*
-config/*
-config.js
-postcss.config.js
