@@ -47,12 +47,7 @@ module.exports = {
         ],
         // react rules部分
         // 参考地址 https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules
-        "react/display-name": [
-            1,
-            {
-              "ignoreTranspilerName": false
-            }
-          ],
+        "react/display-name": 0,
           "react/forbid-prop-types": [
             1,
             {
@@ -94,11 +89,13 @@ module.exports = {
         "react/no-did-mount-set-state": 1,
         "react/no-did-update-set-state": 1,
         "react/no-direct-mutation-state": 1,
-        "react/no-multi-comp": 1,
+        "react/no-multi-comp": 0, // 一个文件只声明一个组件
         "react/no-set-state": 0,
         "react/no-unknown-property": 1,
         "react/prefer-es6-class": 1,
-        "react/prop-types": 1,
+        "react/prop-types": [1, { // props 属性需要声明对应的类型
+            ignore: ['children', 'url'], // 排除常用的属性
+        }],
         "react/react-in-jsx-scope": 0,
     }
 }
