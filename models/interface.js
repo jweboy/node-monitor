@@ -6,7 +6,7 @@ const createReport = (data) => {
 
 // https://www.jianshu.com/p/dbf965f8d314
 
-const reportList = ({ status = ['failed'], keyword, methods = [] }) => {
+const reportList = async ({ status = ['failed'], keyword, methods = [], page = 1, size = 10 }) => {
 	const filters = {
 		// 请求方法搜索（多选）
 		...(methods.length > 0 && {
@@ -19,13 +19,20 @@ const reportList = ({ status = ['failed'], keyword, methods = [] }) => {
 		// 关键词模糊查询
 		...(keyword && { url: new RegExp(keyword) })
 	};
-	console.log('filters => ', filters);
 	// 最新日期排序（降序）
 	const sorter = { createAt: -1 };
-	return interfaceModel
+	const list  = await interfaceModel
 		.find(filters)
+		.skip(+size * (+page - 1)) //* skip在数据量大的时候会有性能问题
+		.limit(+size)
 		.sort(sorter)
 		.exec();
+
+	console.log(page, size);
+
+	const total = await interfaceModel.find().countDocuments();
+
+	return { list, total };
 };
 
 const reportDetail = (id) => {

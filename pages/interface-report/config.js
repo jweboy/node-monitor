@@ -65,6 +65,8 @@ const getSearchColumnProps = (ctx) => ({
 	),
 });
 
+export const resetPage = () => ({ page: 1, size: 10 });
+
 export const statusList = [
 	{
 		title: '成功',

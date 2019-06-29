@@ -24,12 +24,14 @@ app.prepare().then(() => {
 	const router = new Router();
 
 	router.get('/api/list', async (ctx) => {
-		const { status = 'failed', keyword = '', method = '' } = ctx.query;
+		const { status = 'failed', keyword = '', method = '', page, size } = ctx.query;
 
 		ctx.body = await reportList({
 			methods: method !== '' ? method.split(',') : [],
 			status: status !== '' ? status.split(',') : [],
 			keyword: keyword !== '' ? keyword.replace(/\//g, '\\/') : keyword,
+			page,
+			size,
 		});
 	});
 
