@@ -1,5 +1,11 @@
-.container{
-    /* padding: 20px; */
+.search{
+   padding: 10px;
+}
+.search-input{
+    margin-bottom: 10px;
+}
+.search-btn{
+    margin-right: 5px;
 }
 .detail{
     margin-top: 10px;

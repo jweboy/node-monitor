@@ -7,7 +7,7 @@ const cors = require('@koa/cors');
 const Ora = require('ora');
 const chalk = require('chalk');
 const { logger } = require('jweboy-utils');
-const { createReport, reportList, reportDetail, performanceList } = require('./models/interface');
+const { createReport, reportList, reportDetail } = require('./models/interface');
 
 require('dotenv').config();
 
@@ -23,17 +23,20 @@ app.prepare().then(() => {
 	const server = new Koa();
 	const router = new Router();
 
-	router.get('/interface/performance', async (ctx) => {
-		const list = await performanceList();
+	router.get('/api/list', async (ctx) => {
+		const { status = 'failed', keyword = '', method = '' } = ctx.query;
 
-		await app.render(ctx.req, ctx.res, '/interface-performance/list', list);
-		ctx.respond = false;
+		ctx.body = await reportList({
+			methods: method !== '' ? method.split(',') : [],
+			status: status !== '' ? status.split(',') : [],
+			keyword: keyword !== '' ? keyword.replace(/\//g, '\\/') : keyword,
+		});
 	});
 
 	router.get('/interface/report', async (ctx) => {
-		const list = await reportList();
+		const list = await reportList({ status: 'failed' });
 
-		await app.render(ctx.req, ctx.res, '/interface-report/list', list);
+		await app.render(ctx.req, ctx.res, '/interface-report/list', { list });
 		ctx.respond = false;
 	});
 
@@ -46,17 +49,14 @@ app.prepare().then(() => {
 
 	router.post('/report/api', async (ctx) => {
 		const { body } = ctx.request;
-		const { type, info , ...restProps } = body;
-		const logMap = {
-			performance: 'info',
-			report: 'error',
-		};
+		const { status, info , ...restProps } = body;
+		const logMap = { succeed: 'info', failed: 'error' };
 
-		logger[logMap[type]](JSON.stringify(body));
+		logger[logMap[status]](JSON.stringify(body));
 		ctx.body = await createReport({
 			...restProps,
 			info: JSON.stringify(info),
-			type,
+			status,
 		});
 	});
 

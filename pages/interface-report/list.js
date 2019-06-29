@@ -1,49 +1,104 @@
 import React from 'react';
-import { Table } from 'antd';
-import Router from 'next/router';
+import { Table, Input } from 'antd';
+import Router, { withRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import { columns } from './config';
+import qs from 'querystringify';
+import fetch from 'isomorphic-unfetch';
+import { getColumns } from './config';
 import Layout from '../../components/Layout';
+import './index.css';
 
-class APIPage extends React.Component {
+const request = async (url) => {
+	const resp = await fetch(url);
+	const data = await resp.json();
+	return data;
+};
+
+class InterfaceList extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.onRow = (record) => ({
 			onClick: this.handleClick.bind(this, record),
 		});
+		this.state = {
+			filters: {
+				status: ['failed'],
+				method: '',
+				keyword: '',
+			},
+			list: [],
+		};
 	}
     static defaultProps = {
-    	data: [],
+    	list: [],
     }
     static propTypes = {
-    	data: PropTypes.array,
+    	list: PropTypes.array,
     }
-    static async getInitialProps(props) {
-    	const { query } = props;
+    componentDidMount() {
+    	this.asyncGetList();
+    }
+    componentDidUpdate(_, prevState) {
+    	if(prevState.filters !== this.state.filters) {
+    		this.asyncGetList();
+    	}
+    }
+    asyncGetList() {
+    	const { filters } = this.state;
+    	// console.warn('request =>', filters);
 
-    	return {
-    		data: query,
-    	};
+    	request(`http://localhost:4004/api/list${qs.stringify(filters, true)}`)
+    		.then((list) => {
+    			this.setState({ list });
+    		});
+    }
+    handleSearchInputChange = (setSelectedKeys) => (evt) => {
+    	return setSelectedKeys(evt.target.value ? [evt.target.value] : []);
+    }
+    handleSearch = (selectedKeys, confirm) => () => {
+    	confirm();
+    	this.handleFilterChange('keyword', selectedKeys[0] || '');
+    }
+    handleReset = (clearFilters) => () => {
+    	clearFilters();
+    	this.handleFilterChange('keyword', '');
     }
     handleClick = (record) => {
-    	/* eslint-disable */
     	const { url } = this.props;
 
     	Router.replace(`${url.asPath}/${record.id}`);
     }
+    handleFilterChange = (key, value) => {
+    	this.setState((prevState) => ({
+    		filters: {
+    			...prevState.filters,
+    			[key]: value
+    		}
+    	}));
+    }
+    handleTableChange = (pagination, filters) => {
+    	const { status, method } = filters;
+
+    	this.setState((prevState) => ({
+    		filters: {
+    			...prevState.filters,
+    			...(method && { method }),
+    			...(status && { status }),
+    		},
+    	}));
+    }
     render() {
-    	const { data } = this.props;
-    	// console.table(data);
+    	const { list } = this.state;
 
     	return (
     		<div className="container">
-                <Layout>
-				    <Table columns={columns} dataSource={data} rowKey="id" onRow={this.onRow} />
-                </Layout>
+    			<Layout>
+				    <Table columns={getColumns(this)} dataSource={list} rowKey="id" onRow={this.onRow} onChange={this.handleTableChange} />
+    			</Layout>
     		</div>
     	);
     }
 }
 
-export default APIPage;
+export default withRouter(InterfaceList);

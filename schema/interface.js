@@ -9,7 +9,8 @@ const interfaceSchema = new Schema({
 	info: { type: String },
 	message: { type: String },
 	code: { type: Number },
-	type: { type: String },
+	status: { type: String },
+	request: { type: Number },
 });
 
 // https://www.jianshu.com/p/2181b2e27021

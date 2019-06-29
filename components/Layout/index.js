@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
 import PropTypes from 'prop-types';
 import './index.css';
 
 const MenuItem = Menu.Item;
 
-const menu = [{
-	key: 'api-report',
-	name: '接口报警'
-}];
+const menu = [
+	// {
+	//     key: 'api-report',
+	//     name: '接口报警'
+	// }
+];
 
 export class Layout extends Component {
 	render() {
@@ -30,13 +32,5 @@ export class Layout extends Component {
 		);
 	}
 }
-
-Layout.defaultProps = {
-	children: <div />,
-};
-
-Layout.propTypes = {
-	children: PropTypes.element
-};
 
 export default Layout;
