@@ -28,8 +28,6 @@ const reportList = async ({ status = ['failed'], keyword, methods = [], page = 1
 		.sort(sorter)
 		.exec();
 
-	console.log(page, size);
-
 	const total = await interfaceModel.find().countDocuments();
 
 	return { list, total };

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Descriptions, Button, Icon } from 'antd';
+import { Descriptions, Button, Icon, Row, Col, Badge, Tag, Breadcrumb } from 'antd';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
 // import { format } from 'jweboy-utils/lib/date-time';
 import dayjs from 'dayjs';
+import { statusMap,  methodColorMap } from './config';
+import Layout from '../../components/Layout';
 import './index.css';
-
-const DescriptionItem = Descriptions.Item;
 
 class InterfaceDetail extends Component {
     static defaultProps = {
@@ -30,31 +30,67 @@ class InterfaceDetail extends Component {
     		data: query,
     	};
     }
-    handleBackBtnClick() {
-    	Router.back();
-    }
     render() {
     	const { data } = this.props;
+    	const currentStatus = statusMap[data.status];
+    	const currMethodColorText = methodColorMap[data.method.toLowerCase()];
+
     	return (
-    		<div className="container">
-    			<Button onClick={this.handleBackBtnClick}>
-    				<Icon type="left" />
-    				<span>back</span>
-    			</Button>
-    			<Descriptions title="细节说明" className="detail" bordered>
-    				<DescriptionItem label="请求方法">{data.method}</DescriptionItem>
-    				<DescriptionItem label="状态码">{data.code}</DescriptionItem>
-    				<DescriptionItem label="请求路径">{data.url}</DescriptionItem>
-    				<DescriptionItem label="创建时间">{dayjs(data.createAt).format('YYYY-MM-DD HH:mm:ss')}</DescriptionItem>
-    				<DescriptionItem label="浏览器">
-    					<div className="browser">{data.browser}</div>
-    				</DescriptionItem>
-    				<DescriptionItem label="请求参数">{data.info}</DescriptionItem>
-    				<DescriptionItem label="错误信息" className="message">
-    					<div className="message">{data.message}</div>
-    				</DescriptionItem>
-    			</Descriptions>
-    		</div>
+    		<Layout>
+    			<Breadcrumb className="breadcrumb">
+    				<Breadcrumb.Item href="/interface/report">
+    					<Icon type="home" />
+    				</Breadcrumb.Item>
+    				<Breadcrumb.Item>
+    					<Icon type="user" />
+    					<span>请求详情</span>
+    				</Breadcrumb.Item>
+    			</Breadcrumb>
+    			<div>
+    				<h2 className="interface-title">基本信息</h2>
+    				<div className="interface-info">
+    					<Row className="interface-row">
+    						<Col span="3">接口路径：</Col>
+    						<Col span="9">
+    							<Tag color={currMethodColorText}>
+    								{data.method}
+    							</Tag>
+    							<span>{data.url}</span>
+    						</Col>
+    						<Col span="3">创建时间：</Col>
+    						<Col span="9">{dayjs(data.createAt).format('YYYY-MM-DD HH:mm:ss')}</Col>
+    					</Row>
+    					<Row className="interface-row">
+    						<Col span="3">状态：</Col>
+    						<Col span="9">
+    							<Badge {...currentStatus} />
+    						</Col>
+    						<Col span="3">状态码：</Col>
+    						<Col span="9">{data.code}</Col>
+    					</Row>
+    					<Row className="interface-row">
+    						<Col span="3">浏览器内核：</Col>
+    						<Col span="21">{data.browser}</Col>
+    					</Row>
+    				</div>
+    			</div>
+    			<div>
+    				<h2 className="interface-title">错误信息</h2>
+    				<div className="interface-info">
+    					<Row className="interface-row">
+    						{data.message}
+    					</Row>
+    				</div>
+    			</div>
+    			<div>
+    				<h2 className="interface-title">请求参数</h2>
+    				<div className="interface-info">
+    					<Row className="interface-row">
+    						{data.info}
+    					</Row>
+    				</div>
+    			</div>
+    		</Layout>
     	);
     }
 }

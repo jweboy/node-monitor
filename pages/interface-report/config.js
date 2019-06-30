@@ -5,12 +5,12 @@ import { Input, Button, Icon, Tag, Badge } from 'antd';
 import Highlighter from 'react-highlight-words';
 import './index.css';
 
-const methodColorMap = {
+export const methodColorMap = {
 	get: 'green',
 	post: 'blue',
 };
 
-const statusMap = {
+export const statusMap = {
 	succeed: {
 		status: 'success',
 		text: '成功',

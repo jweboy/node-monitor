@@ -16,3 +16,17 @@
 .message{
     word-break: break-all;
 }
+.interface-title{
+    border-left: 3px solid #2395f1;
+    padding-left: 8px;
+    margin-bottom: 16px;
+}
+.interface-info {
+    padding: 16px;
+}
+.interface-row {
+    margin-bottom: 16px;
+}
+.breadcrumb{
+    margin-bottom: 10px;
+}
