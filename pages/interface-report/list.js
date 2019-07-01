@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Input } from 'antd';
+import { Table } from 'antd';
 import Router, { withRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import qs from 'querystringify';
@@ -32,6 +32,10 @@ class InterfaceList extends React.Component {
 			total: 0,
 		};
 	}
+	static async getInitialProps() {
+		const env = process.env;
+		return { env };
+	}
     static defaultProps = {
     	list: [],
     }
@@ -48,8 +52,11 @@ class InterfaceList extends React.Component {
     }
     asyncGetList() {
     	const { filters } = this.state;
+    	const { env } = this.props;
 
-    	request(`http://localhost:4004/api/list${qs.stringify(filters, true)}`)
+    	// console.warn(env, `${env.SERVER_PROTOCOL}://${env.SERVER_HOST}:${env.SERVER_PORT}/api/list${qs.stringify(filters, true)}`)
+
+    	request(`${env.SERVER_PROTOCOL}://${env.SERVER_HOST}:${env.SERVER_PORT}/api/list${qs.stringify(filters, true)}`)
     		.then((resp) => {
     			this.setState({ ...resp });
     		});

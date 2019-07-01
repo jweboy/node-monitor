@@ -14,9 +14,9 @@ require('dotenv').config();
 const app = next({ dev: process.env.NODE_ENV === 'development' });
 const reqHandler = app.getRequestHandler();
 const spinner = new Ora();
-const PORT = 4004 || process.env.PORT;
-const PROTOCOL = 'http' || process.env.PROTOCOL;
-const DOMAIN = 'localhost' || process.env.DOMAIN;
+const port = process.env.SERVER_PORT;
+const protocol = process.env.SERVER_PROTOCOL;
+const host = process.env.SERVER_HOST;
 const DBURL = `mongodb://${process.env.DB_HOST}:27017/monitor`;
 
 app.prepare().then(() => {
@@ -89,9 +89,9 @@ app.prepare().then(() => {
 		.use(bodyParser())
 		.use(cors())
 		.use(router.routes())
-		.listen(PORT, () => {
-			logger.info(`Server is running at ${PROTOCOL}://${DOMAIN}:${PORT}`);
-			spinner.succeed(chalk.green(`Server is running at ${PROTOCOL}://${DOMAIN}:${PORT}`));
+		.listen(port, () => {
+			logger.info(`Server is running at ${protocol}://${host}:${port}`);
+			spinner.succeed(chalk.green(`Server is running at ${protocol}://${host}:${port}`));
 		});
 });
 
