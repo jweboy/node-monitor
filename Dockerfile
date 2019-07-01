@@ -9,8 +9,11 @@ COPY . .
 RUN npm install -d --registry=https://registry.npm.taobao.org --no-cache
 RUN npm run build
 
-ENV NODE_ENV=production
+ENV SERVER_HOST=118.24.155.105
+ENV SERVER_PROTOCOL=http
+ENV SERVER_PORT=4004
 ENV DB_HOST=mongo-service
+ENV NODE_ENV=production
 
-# EXPOSE 3000
+# EXPOSE 4004
 CMD ["npm", "start"]
