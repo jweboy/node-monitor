@@ -1,13 +1,16 @@
-const withCss = require('@zeit/next-css');
+const withLess = require('@zeit/next-less');
 const Dotenv = require('dotenv-webpack');
 const path = require('path');
 
 if(typeof require !== 'undefined') {
-	require.extensions['.css'] = () => {};
+	require.extensions['.less'] = () => {};
 }
 
-module.exports = withCss({
-	webpack: config => {
+module.exports = withLess({
+	lessLoaderOptions: {
+		javascriptEnabled: true,
+	},
+	webpack(config) {
 		config.plugins = config.plugins || [];
 
 		config.plugins = [
