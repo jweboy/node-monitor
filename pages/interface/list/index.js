@@ -4,9 +4,9 @@ import Router, { withRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import qs from 'querystringify';
 import fetch from 'isomorphic-unfetch';
-import { getColumns, resetPage } from './config';
-import Layout from '../../components/Layout';
-import './index.css';
+import { getColumns, resetPage } from '../config';
+import Layout from '../../../components/Layout';
+import './index.less';
 
 const request = async (url) => {
 	const resp = await fetch(url);

@@ -3,9 +3,9 @@ import { Icon, Row, Col, Badge, Tag, Breadcrumb } from 'antd';
 import PropTypes from 'prop-types';
 // import { format } from 'jweboy-utils/lib/date-time';
 import dayjs from 'dayjs';
-import { statusMap,  methodColorMap } from './config';
-import Layout from '../../components/Layout';
-import './index.css';
+import { statusMap,  methodColorMap } from '../config';
+import Layout from '../../../components/Layout';
+import './index.less';
 
 
 class InterfaceDetail extends Component {
@@ -39,7 +39,7 @@ class InterfaceDetail extends Component {
     	return (
     		<Layout>
     			<Breadcrumb className="breadcrumb">
-    				<Breadcrumb.Item href="/interface/report">
+    				<Breadcrumb.Item href="/interface">
     					<Icon type="home" />
     				</Breadcrumb.Item>
     				<Breadcrumb.Item>

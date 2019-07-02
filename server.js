@@ -35,17 +35,17 @@ app.prepare().then(() => {
 		});
 	});
 
-	router.get('/interface/report', async (ctx) => {
+	router.get('/interface', async (ctx) => {
 		const list = await reportList({ status: 'failed' });
 
-		await app.render(ctx.req, ctx.res, '/interface-report/list', { list });
+		await app.render(ctx.req, ctx.res, '/interface/list', { list });
 		ctx.respond = false;
 	});
 
-	router.get('/interface/report/:id', async (ctx) => {
+	router.get('/interface/:id', async (ctx) => {
 		const { id } = ctx.params;
 		const detail = await reportDetail(id);
-		await app.render(ctx.req, ctx.res, '/interface-report/detail', detail);
+		await app.render(ctx.req, ctx.res, '/interface/detail', detail);
 		ctx.respond = false;
 	});
 
@@ -63,7 +63,7 @@ app.prepare().then(() => {
 	});
 
 	router.get('/', async (ctx) => {
-		await app.render(ctx.req, ctx.res, '/home');
+		await app.render(ctx.req, ctx.res, '/');
 		ctx.respond = false;
 	});
 

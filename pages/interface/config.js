@@ -3,7 +3,7 @@
 import dayjs from 'dayjs';
 import { Input, Button, Icon, Tag, Badge } from 'antd';
 import Highlighter from 'react-highlight-words';
-import './index.css';
+import './index.less';
 
 export const methodColorMap = {
 	get: 'green',

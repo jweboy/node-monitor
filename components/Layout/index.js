@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Menu } from 'antd';
-import PropTypes from 'prop-types';
-import './index.css';
+// import PropTypes from 'prop-types';
+import './index.less';
 
 const MenuItem = Menu.Item;
 

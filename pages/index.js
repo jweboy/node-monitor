@@ -1,17 +1,14 @@
 import React from 'react';
+import Router from 'next/router';
 // import getConfig from 'next/config'
-import Link from 'next/link';
 // const { publicRuntimeConfig } = getConfig()
 
 export default class App extends React.Component {
-	static async getInitialProps () {
-		// fetch(`${API_URL}/some-path`)
-		return {};
+	componentDidMount() {
+		Router.push('/interface');
 	}
 
 	render () {
-		return <div>
-			<Link href="/about"><a>click</a></Link>
-		</div>;
+		return null;
 	}
 }
