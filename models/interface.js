@@ -28,8 +28,7 @@ const reportList = async ({ status = ['failed'], keyword, methods = [], page = 1
 		.sort(sorter)
 		.exec();
 
-	// TODO: Total带入筛选条件
-	const total = await interfaceModel.find().countDocuments();
+	const total = await interfaceModel.find(filters).countDocuments().exec();
 
 	return { list, total };
 };
