@@ -38,6 +38,7 @@ app.prepare().then(() => {
 	router.get('/interface', async (ctx) => {
 		const list = await reportList({ status: 'failed' });
 
+		ctx.status = 200;
 		await app.render(ctx.req, ctx.res, '/interface/list', { list });
 		ctx.respond = false;
 	});
@@ -45,6 +46,8 @@ app.prepare().then(() => {
 	router.get('/interface/:id', async (ctx) => {
 		const { id } = ctx.params;
 		const detail = await reportDetail(id);
+
+		ctx.status = 200;
 		await app.render(ctx.req, ctx.res, '/interface/detail', detail);
 		ctx.respond = false;
 	});
