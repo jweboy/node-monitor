@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # step1
 make build-image
 

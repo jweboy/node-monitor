@@ -6,7 +6,7 @@ COPY . .
 # RUN yarn install
 # RUN yarn build
 
-RUN npm install -d --registry=https://registry.npm.taobao.org --no-cache
+RUN npm install -d --registry=https://registry.npm.taobao.org
 RUN npm run build
 
 ENV SERVER_HOST=118.24.155.105
