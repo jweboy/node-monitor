@@ -7,4 +7,4 @@ make build-image
 make push-image
 
 # step3
-ssh server < deploy.sh
+# ssh server < deploy.sh
