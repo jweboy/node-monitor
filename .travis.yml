@@ -2,11 +2,13 @@
 language: node_js
 node_js:
   - "10"
-cache:
-  directories:
-    - node_modules
 services:
     - docker
+branchs:
+  only:
+    - deploy
+before_script:
+  - chmod 755 build.sh
 script:
   - npm run deploy
 # notifications:

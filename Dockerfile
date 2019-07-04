@@ -35,7 +35,7 @@ COPY . .
 RUN npm run build
 
 # 全局变量
-ENV SERVER_HOST=localhost
+ENV SERVER_HOST=jweboy.com
 ENV SERVER_PROTOCOL=http
 ENV SERVER_PORT=4004
 ENV DB_HOST=mongo-service
