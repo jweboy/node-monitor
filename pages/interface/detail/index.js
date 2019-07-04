@@ -3,10 +3,11 @@ import { Icon, Row, Col, Badge, Tag, Breadcrumb } from 'antd';
 import PropTypes from 'prop-types';
 // import { format } from 'jweboy-utils/lib/date-time';
 import dayjs from 'dayjs';
+import dynamic from 'next/dynamic';
 import { statusMap,  methodColorMap } from '../config';
-import Layout from '../../../components/Layout';
 import './index.less';
 
+const Layout = dynamic(() => import('../../../components/Layout'));
 
 class InterfaceDetail extends Component {
     static defaultProps = {
@@ -43,7 +44,6 @@ class InterfaceDetail extends Component {
     					<Icon type="home" />
     				</Breadcrumb.Item>
     				<Breadcrumb.Item>
-    					<Icon type="user" />
     					<span>请求详情</span>
     				</Breadcrumb.Item>
     			</Breadcrumb>

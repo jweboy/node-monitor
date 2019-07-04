@@ -4,9 +4,12 @@ import Router, { withRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import qs from 'querystringify';
 import fetch from 'isomorphic-unfetch';
+import dynamic from 'next/dynamic';
 import { getColumns, resetPage } from '../config';
-import Layout from '../../../components/Layout';
+// import Layout from '../../../components/Layout';
 import './index.less';
+
+const Layout = dynamic(() => import('../../../components/Layout'));
 
 const request = async (url) => {
 	const resp = await fetch(url);
@@ -107,18 +110,16 @@ class InterfaceList extends React.Component {
     	};
 
     	return (
-    		<div className="container">
-    			<Layout>
-    				<Table
-    					columns={getColumns(this)}
-    					dataSource={list}
-    					rowKey="id"
-    					onRow={this.onRow}
-    					onChange={this.handleTableChange}
-    					pagination={pagination}
-    				/>
-    			</Layout>
-    		</div>
+    		<Layout>
+    			<Table
+    				columns={getColumns(this)}
+    				dataSource={list}
+    				rowKey="id"
+    				onRow={this.onRow}
+    				onChange={this.handleTableChange}
+    				pagination={pagination}
+    			/>
+    		</Layout>
     	);
     }
 }
