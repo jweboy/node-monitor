@@ -1,7 +1,8 @@
 #!/bin/sh
 
+tag="latest"
 container_name="node-monitor"
-image_name="jweboy/${container_name}:latest"
+image_name="jweboy/${container_name}:${tag}"
 
 docker pull ${image_name}
 
