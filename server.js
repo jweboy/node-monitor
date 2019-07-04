@@ -7,7 +7,8 @@ const cors = require('@koa/cors');
 const Ora = require('ora');
 const chalk = require('chalk');
 const { logger } = require('jweboy-utils');
-const { createReport, reportList, reportDetail } = require('./models/interface');
+const { reportList, reportDetail } = require('./models/interface');
+const registerRouter = require('./routes');
 
 require('dotenv').config();
 
@@ -23,24 +24,13 @@ app.prepare().then(() => {
 	const server = new Koa();
 	const router = new Router();
 
-	router.get('/api/list', async (ctx) => {
-		const { status = 'failed', keyword = '', method = '', page, size } = ctx.query;
-
-		ctx.body = await reportList({
-			methods: method !== '' ? method.split(',') : [],
-			status: status !== '' ? status.split(',') : [],
-			keyword: keyword !== '' ? keyword.replace(/\//g, '\\/') : keyword,
-			page,
-			size,
-		});
-	});
-
 	router.get('/interface', async (ctx) => {
 		const list = await reportList({ status: 'failed' });
 
 		ctx.status = 200;
 		await app.render(ctx.req, ctx.res, '/interface/list', { list });
 		ctx.respond = false;
+		ctx.body = 'hello';
 	});
 
 	router.get('/interface/:id', async (ctx) => {
@@ -50,19 +40,6 @@ app.prepare().then(() => {
 		ctx.status = 200;
 		await app.render(ctx.req, ctx.res, '/interface/detail', detail);
 		ctx.respond = false;
-	});
-
-	router.post('/report/api', async (ctx) => {
-		const { body } = ctx.request;
-		const { status, info , ...restProps } = body;
-		const logMap = { succeed: 'info', failed: 'error' };
-
-		logger[logMap[status]](JSON.stringify(body));
-		ctx.body = await createReport({
-			...restProps,
-			info: JSON.stringify(info),
-			status,
-		});
 	});
 
 	router.get('/', async (ctx) => {
@@ -91,6 +68,7 @@ app.prepare().then(() => {
 	server
 		.use(bodyParser())
 		.use(cors())
+		.use(registerRouter())
 		.use(router.routes())
 		.listen(port, () => {
 			logger.info(`Server is running at ${protocol}://${host}:${port}`);
@@ -101,3 +79,5 @@ app.prepare().then(() => {
 process.on('unhandledRejection', err => {
 	throw err;
 });
+
+module.exports = app;
