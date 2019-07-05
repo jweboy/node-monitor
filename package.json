@@ -25,6 +25,7 @@
     "@zeit/next-less": "^1.0.1",
     "antd": "3.19.6",
     "chalk": "2.4.2",
+    "codemirror": "^5.48.0",
     "dotenv-webpack": "^1.7.0",
     "glob": "^7.1.4",
     "isomorphic-unfetch": "^3.0.0",
@@ -40,8 +41,11 @@
     "ora": "3.4.0",
     "querystringify": "^2.1.1",
     "react": "^16.7.0",
+    "react-codemirror2": "^6.0.0",
     "react-dom": "^16.7.0",
-    "react-highlight-words": "^0.16.0"
+    "react-highlight-words": "^0.16.0",
+    "react-monaco-editor": "^0.26.2",
+    "source-map": "^0.7.3"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.44",
@@ -51,6 +55,7 @@
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.7.0"
+    "eslint-plugin-react": "^7.7.0",
+    "monaco-editor-webpack-plugin": "^1.7.0"
   }
 }

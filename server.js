@@ -9,6 +9,8 @@ const chalk = require('chalk');
 const { logger } = require('jweboy-utils');
 const { reportList, reportDetail } = require('./models/interface');
 const registerRouter = require('./routes');
+const errorException = require('./models/error-exception');
+const lookupSourceMap = require('./utils/source-map');
 
 require('dotenv').config();
 
@@ -24,13 +26,38 @@ app.prepare().then(() => {
 	const server = new Koa();
 	const router = new Router();
 
+	// 捕获代码异常
+	router.get('/error-exception', async (ctx) => {
+		const list = await errorException.findAll();
+
+		ctx.status = 200;
+		await app.render(ctx.req, ctx.res, '/error-exception/list', { list });
+		ctx.respond = false;
+	});
+
+	router.get('/error-exception/:id', async (ctx) => {
+		const { id } = ctx.params;
+		const data = await errorException.findOne(id);
+		const { line, column, ...restProps} =  await lookupSourceMap(data.lineNo, data.columnNo);
+		const resp = {
+			...data.toObject(),
+			lineNo: line,
+			columnNo: column,
+			...restProps,
+		};
+
+		ctx.status = 200;
+		await app.render(ctx.req, ctx.res, '/error-exception/detail', resp);
+		ctx.respond = false;
+	});
+
+	// 捕获接口异常
 	router.get('/interface', async (ctx) => {
 		const list = await reportList({ status: 'failed' });
 
 		ctx.status = 200;
 		await app.render(ctx.req, ctx.res, '/interface/list', { list });
 		ctx.respond = false;
-		ctx.body = 'hello';
 	});
 
 	router.get('/interface/:id', async (ctx) => {
@@ -42,6 +69,7 @@ app.prepare().then(() => {
 		ctx.respond = false;
 	});
 
+	// 主页
 	router.get('/', async (ctx) => {
 		await app.render(ctx.req, ctx.res, '/');
 		ctx.respond = false;
