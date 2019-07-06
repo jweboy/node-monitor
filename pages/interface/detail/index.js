@@ -103,7 +103,7 @@ class InterfaceDetail extends Component {
     				<h2 className="interface-title">请求参数</h2>
     				<div className="interface-info">
     					<Row className="interface-row">
-    						{JSON.parse(data.info)}
+    						{data.info}
     					</Row>
     				</div>
     			</div>

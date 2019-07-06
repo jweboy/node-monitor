@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import { Breadcrumb, Icon } from 'antd';
 import dynamic from 'next/dynamic';
 import './index.less';
 
 const Layout = dynamic(() => import('../../../components/Layout'));
+
+const BreadcrumbItem = Breadcrumb.Item;
 
 class ErrorExceptionDetail extends Component {
 	static async getInitialProps(props) {
@@ -17,6 +20,14 @@ class ErrorExceptionDetail extends Component {
 
 		return (
 			<Layout>
+				<Breadcrumb className="breadcrumb">
+    				<BreadcrumbItem href="/error-exception">
+    					<Icon type="home" />
+    				</BreadcrumbItem>
+    				<BreadcrumbItem>
+    					<span>代码异常详情</span>
+    				</BreadcrumbItem>
+    			</Breadcrumb>
 				<div>
 					<h3>{data.source}</h3>
 					<h4>{data.url}</h4>
