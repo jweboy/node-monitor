@@ -1,5 +1,5 @@
 commitID=$(shell git log --pretty=format:"%H" -1)
-tag="latest"
+tag=latest
 
 build-image:
 	@echo "============= docker build image ============="
