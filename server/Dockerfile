@@ -39,4 +39,4 @@ ENV DB_HOST=mongo-service
 ENV NODE_ENV=production
 
 # 运行 server
-CMD ["node", "server.js"]
+CMD ["node", "app.js"]

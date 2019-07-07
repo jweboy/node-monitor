@@ -14,7 +14,7 @@
     "mongo"
   ],
   "scripts": {
-    "serve": "nodemon server.js",
+    "serve": "nodemon app.js",
     "build": "next build",
     "deploy": "./build.sh",
     "dev": "npm run build && npm run dev"
