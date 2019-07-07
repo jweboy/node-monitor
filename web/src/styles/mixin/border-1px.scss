@@ -1,0 +1,13 @@
+@mixin borderhalfY($bdcolor){  //1px描边Y  top and bottom
+  content: "";
+  display: block; 
+  background:$bdcolor; 
+  position: absolute;
+  height:1px; 
+  -webkit-transform:scaleY(0.5); 
+  -moz-transform: scaleY(0.5); 
+  transform: scaleY(0.5);
+  -webkit-transform-origin:center top;
+  -moz-transform-origin:center top;
+  transform-origin:center top;
+}

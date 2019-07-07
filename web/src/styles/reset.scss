@@ -1,0 +1,76 @@
+// * {
+//   box-sizing: border-box;
+// }
+
+// *,
+//  :after,
+//  :before {
+//   -webkit-tap-highlight-color: transparent;
+// }
+
+// html,
+// body {
+//   height: 100%;
+// }
+
+html {
+  // font-size: 50px;
+}
+
+body {
+  user-select: none;
+  // line-height: 1.5;
+  // font-size: 0.32rem;
+  background-color: #f5f5f9;
+  position: relative;
+  font-family: PingFangSC-Light, helvetica, 'Heiti SC';
+}
+
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+// b,
+// em,
+// p,
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6,
+// strong {
+//   font-weight: 400;
+// }
+
+ul,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+a.active {
+  color: rgb(16, 142, 233);
+}
+
+// input,
+// button {
+//   outline: none;
+// }
+
+// button {
+//   border: none;
+// }
