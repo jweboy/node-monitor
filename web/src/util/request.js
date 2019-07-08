@@ -34,8 +34,6 @@ const Axios = axios.create({
 	_useForm: false
 });
 
-let loading = null;
-
 // 请求拦截器
 Axios.interceptors.request.use(
 	function reqSuccHandler(config) {
@@ -73,11 +71,12 @@ Axios.interceptors.response.use(
 				return res.data;
 			}
 		} else {
-			const msg = res.data ? res.data.message : '';
+			// console.warn(res.data);
+			// const msg = res.data ? res.data.message : '';
 
-			notification.error({ title: '请求失败', message: msg });
+			// notification.error({ title: '请求失败', message: msg });
 
-			return Promise.reject(msg);
+			// return Promise.reject(msg);
 		}
 	},
 	function resErrHander(err) {

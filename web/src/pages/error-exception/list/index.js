@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Table } from 'antd';
 import { columns } from './config';
 import { request } from 'util/request';
+import styles from './index.less';
 
 class ErrorExceptionList extends Component {
 	constructor(props) {
@@ -30,11 +31,23 @@ class ErrorExceptionList extends Component {
 
 		navigate(`/error-exception/${record.id}`);
 	}
+	handleClearAllData = () => {
+		request.delete('/error-exception').then(() => {
+    		this.asyncGetList();
+    	});
+	}
+	handlePreviewExample() {
+		window.open('http://jweboy.com/throw-error-example');
+	}
 	render() {
     	const { data } = this.state;
 
     	return (
-			<Table dataSource={data} columns={columns} rowKey="id" onRow={this.onRow} />
+			<div>
+				<a className={styles.btn} onClick={this.handlePreviewExample}>预览地址</a>
+				<a className={styles.btn} onClick={this.handleClearAllData}>清除数据</a>
+				<Table className={styles.table} dataSource={data} columns={columns} rowKey="id" onRow={this.onRow} />
+			</div>
     	);
 	}
 }
