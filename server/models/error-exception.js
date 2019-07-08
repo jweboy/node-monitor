@@ -12,10 +12,15 @@ function findOne(id) {
 	return model.findById(id).exec();
 }
 
+function removeAll() {
+    return model.remove();
+}
+
 const errorException = {
 	create,
 	findAll,
-	findOne,
+    findOne,
+    removeAll,
 };
 
 module.exports = errorException;

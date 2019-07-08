@@ -8,7 +8,6 @@ const fsPromises = fs.promises;
 
 
 async function lookup(lineNo, columnNo) {
-	// console.log(lineNo, columnNo);
 	const mapDir = path.join(process.cwd(), 'source-map');
 	const mapFiles = await fs.readdirSync(mapDir);
 
@@ -28,9 +27,11 @@ async function lookup(lineNo, columnNo) {
 
 	const currentIndex = sources.indexOf(result.source);
 
-	result.sourceContent = fileObj.sourcesContent[currentIndex];
+    result.sourceContent = fileObj.sourcesContent[currentIndex];
 
 	return result;
 }
+
+lookup()
 
 module.exports = lookup;

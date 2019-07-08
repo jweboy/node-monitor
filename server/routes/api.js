@@ -17,7 +17,10 @@ async function getInterfaceList(ctx) {
 }
 
 async function getErrorExceptionList(ctx) {
-	ctx.body = await errorException.findAll();
+    ctx.body = await errorException
+        .findAll()
+        .sort({ createAt: -1 })
+        .exec();
 }
 
 router
@@ -39,6 +42,11 @@ router
             columnNo: column,
             ...restProps,
         };
-    });
+    })
+    .delete('/api/error-exception', async (ctx) => {
+        await errorException.removeAll()
+
+        ctx.body = ''
+    })
 
 module.exports = router;
