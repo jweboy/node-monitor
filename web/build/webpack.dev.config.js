@@ -1,20 +1,20 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const baseWebpackConfig = require('./webpack.base.config');
-const DynamicScript = require('./plugins/dynamic-script')
-const OpenBrowser = require('./plugins/open-browser')
-const webpackDevServer = require('./webpackDevServer.config')
-const manifest = require('../dist/dll/vendor-manifest.json')
-const { dynamicScripts  } = require('../config')
-const env = require('../config/dev.env')
-const paths = require('./paths')
+const DynamicScript = require('./plugins/dynamic-script');
+const OpenBrowser = require('./plugins/open-browser');
+const webpackDevServer = require('./webpackDevServer.config');
+const manifest = require('../dist/dll/vendor-manifest.json');
+const { dynamicScripts  } = require('../config');
+const env = require('../config/dev.env');
+const paths = require('./paths');
 
 // const dashboard = new Dashboard()
-const publicPath = '/'
-const pathsToClean = ['dist']
+const publicPath = '/';
+const pathsToClean = ['dist'];
 
 module.exports = merge(baseWebpackConfig, {
 	// 编译模式
@@ -26,9 +26,9 @@ module.exports = merge(baseWebpackConfig, {
 		// 在bundle中引入所包含模块信息的相关注释
 		pathinfo: true,
 		// 文件保存在 WebpackDevServer 的虚拟内存中
-		filename: 'static/js/bundle.js',
+		filename: 'static/js/[name].[hash].js',
 		// 文件代码拆分
-		chunkFilename: 'static/js/[name].chunk.js',
+		chunkFilename: 'static/js/[name].[chunkhash].js',
 		// 静态资源目录,一般指向 '/'
 		publicPath,
 	},
@@ -75,18 +75,18 @@ module.exports = merge(baseWebpackConfig, {
 		new CleanWebpackPlugin(pathsToClean),
 		// index.html插件
 		new HtmlWebpackPlugin({
-			title: 'react-webpack-toolkit',
+			title: 'node-monitor',
 			template: paths.appIndexHtml,
 		}),
 		// 打包时在动态链接库查找导入的模块
 		// 如果存在直接从动态库中获取，无需重复打包
-		new webpack.DllReferencePlugin({
-			manifest
-		}),
+		// new webpack.DllReferencePlugin({
+		// 	manifest
+		// }),
 		// 动态写入脚本集合
-		new DynamicScript({
-			assets: dynamicScripts
-		}),
+		// new DynamicScript({
+		// 	assets: dynamicScripts
+		// }),
 		// new OpenBrowser({})
 		// webpack运行详细记录面板
 		// new DashboardPlugin(dashboard.setData)

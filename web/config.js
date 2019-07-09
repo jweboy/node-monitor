@@ -4,8 +4,6 @@ module.exports = {
 	vendor: [
 		'react',
 		'react-dom',
-		'react-router-dom',
-		'redux-saga',
 		'antd',
 	],
 	dynamicScripts: [

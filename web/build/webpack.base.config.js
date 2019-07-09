@@ -1,17 +1,17 @@
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
-const webpack = require('webpack')
-const HappyPack = require('happypack')
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const os = require('os')
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const webpack = require('webpack');
+const HappyPack = require('happypack');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const os = require('os');
 
-const paths = require('./paths')
-const { apiUrl, experienceUrl } = require('../config')
+const paths = require('./paths');
+const { apiUrl, experienceUrl } = require('../config');
 
 const happyThreadPool = HappyPack.ThreadPool({
 	size: 4
-})
-const happyThreads = 4
-const imagePath = 'static/imgs/'
+});
+const happyThreads = 4;
+const imagePath = 'static/imgs/';
 
 // FIXME: ts-loader优化方案,参考文章 https://medium.com/webpack/typescript-webpack-super-pursuit-mode-83cc568dea79
 // FIXME: 1.采用缓存和线程加载器 2.happyPack
@@ -19,6 +19,7 @@ const imagePath = 'static/imgs/'
 module.exports = {
 	target: 'web',
 	context: paths.appPath,
+	// entry: paths.appIndexJs,
 	entry: [
 		// Promise、Fetch polyfill
 		require.resolve('./polyfills'),
@@ -75,18 +76,18 @@ module.exports = {
 				test: /\.(png|jp(e)?g|gif)$/,
 				exclude: /node_modules/,
 				use: [{
-						loader: 'file-loader',
-						options: {
-							name(file) {
-								if (process.env.NODE_ENV === 'development') {
-									return '[name].[ext]'
-								}
-								return '[name]__[hash:6].[ext]'
-							},
-							limit: 10240, // 限制图片大小为10M以内
-							// emitFile: false, // 不打包输出图片目录,一般用于图片全部托管于图床
-							outputPath: imagePath // 图片输出路径,开发环境保存在虚拟内存中,即对应 dist/statis/imgs/目录
-						}
+					loader: 'file-loader',
+					options: {
+						name(file) {
+							if (process.env.NODE_ENV === 'development') {
+								return '[name].[ext]';
+							}
+							return '[name]__[hash:6].[ext]';
+						},
+						limit: 10240, // 限制图片大小为10M以内
+						// emitFile: false, // 不打包输出图片目录,一般用于图片全部托管于图床
+						outputPath: imagePath // 图片输出路径,开发环境保存在虚拟内存中,即对应 dist/statis/imgs/目录
+					}
 				}]
 			},
 			{
