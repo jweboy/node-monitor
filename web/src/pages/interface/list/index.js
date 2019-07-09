@@ -9,8 +9,6 @@ import { getColumns, resetPage } from '../config';
 // import Layout from '../../../components/Layout';
 import {request} from '../../../util/request';
 import './index.less';
-import InterfaceDetailPage from 'pages/interface/detail';
-import { Route } from 'react-router-dom';
 
 // @withRouter
 class InterfaceList extends React.Component {
@@ -67,7 +65,7 @@ class InterfaceList extends React.Component {
     handleClick = (record) => {
     	const { navigate } = this.props;
 
-    	navigate(`/interface/${record.id}`);
+    	navigate(`/monitor/interface/${record.id}`);
     }
     handleFilterChange = (key, value) => {
     	this.setState((prevState) => ({

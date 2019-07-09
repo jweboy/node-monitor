@@ -29,7 +29,7 @@ class ErrorExceptionList extends Component {
 	handleRowClick(record) {
 		const { navigate } = this.props;
 
-		navigate(`/error-exception/${record.id}`);
+		navigate(`/monitor/error-exception/${record.id}`);
 	}
 	handleClearAllData = () => {
 		request.delete('/error-exception').then(() => {
@@ -44,7 +44,7 @@ class ErrorExceptionList extends Component {
 
     	return (
 			<div>
-				<a className={styles.btn} onClick={this.handlePreviewExample}>预览地址</a>
+				<a className={styles.btn} onClick={this.handlePreviewExample}>测试地址</a>
 				<a className={styles.btn} onClick={this.handleClearAllData}>清除数据</a>
 				<Table className={styles.table} dataSource={data} columns={columns} rowKey="id" onRow={this.onRow} />
 			</div>

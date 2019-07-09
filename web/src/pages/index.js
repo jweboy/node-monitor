@@ -1,14 +1,10 @@
-import React from 'react';
-import Router from 'next/router';
-// import getConfig from 'next/config'
-// const { publicRuntimeConfig } = getConfig()
+import React, { Component } from 'react';
+import { Redirect } from '@reach/router';
 
-export default class App extends React.Component {
-	componentDidMount() {
-		Router.push('/interface');
-	}
-
+class Home extends Component {
 	render () {
-		return null;
+		return <Redirect to="/monitor/interface" noThrow />;
 	}
 }
+
+export default Home;

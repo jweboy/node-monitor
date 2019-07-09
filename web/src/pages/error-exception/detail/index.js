@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { Breadcrumb, Icon } from 'antd';
+import { Alert } from 'antd';
 import styles from './index.less';
 import { request } from 'util/request';
 
@@ -7,7 +7,9 @@ import { request } from 'util/request';
 
 class ErrorExceptionDetail extends Component {
     state = {
-    	data: {},
+    	data: {
+    		message: '--'
+    	},
     }
     componentDidMount() {
     	this.asyncGetData();
@@ -34,8 +36,9 @@ class ErrorExceptionDetail extends Component {
     				</BreadcrumbItem>
     			</Breadcrumb> */}
     			<div>
+    				<Alert showIcon type="error" message={data.message} />
     				<h3>{data.source}</h3>
-    				<h4>{data.url}</h4>
+    				{/* <h4>{data.url}</h4> */}
     				{data.sourceContent && data.sourceContent.split('\n').map((text, index) => (
     					<div key={index}>
     						<pre className={data.lineNo === index + 1 ? styles.error : ''}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Icon, Row, Col, Badge, Tag, Breadcrumb } from 'antd';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // import { withRouter } from "react-router";
 // import { format } from 'jweboy-utils/lib/date-time';
 import dayjs from 'dayjs';
