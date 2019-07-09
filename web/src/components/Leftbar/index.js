@@ -12,12 +12,12 @@ const menu = [
 	{
 	    key: 'interface',
 		name: '接口分析',
-		url: '/interface',
+		url: '/monitor/interface',
 	},
 	{
 		key: 'error-exception',
 		name: '代码异常',
-		url: '/error-exception',
+		url: '/monitor/error-exception',
 	}
 ];
 

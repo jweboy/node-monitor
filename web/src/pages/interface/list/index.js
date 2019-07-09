@@ -67,8 +67,6 @@ class InterfaceList extends React.Component {
     handleClick = (record) => {
     	const { navigate } = this.props;
 
-    	console.warn(this.props);
-
     	navigate(`/interface/${record.id}`);
     }
     handleFilterChange = (key, value) => {
