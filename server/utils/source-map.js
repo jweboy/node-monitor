@@ -32,6 +32,4 @@ async function lookup(lineNo, columnNo) {
 	return result;
 }
 
-lookup()
-
 module.exports = lookup;
