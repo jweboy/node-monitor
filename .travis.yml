@@ -1,19 +1,19 @@
-# sudo: enable
-language: node_js
-node_js:
-  - "10"
-services:
-    - docker
-branchs:
-  only:
-    - deploy
-before_script:
-  - chmod 755 build.sh
-script:
-  - npm run deploy
-# notifications:
-#   slack:
-#     rooms:
-#       - jweboytm:woLS6D9oasTaWyC1Ks4zqCne
-#     on_success: change
-#     on_failure: always
+# # sudo: enable
+# language: node_js
+# node_js:
+#   - "10"
+# services:
+#     - docker
+# branchs:
+#   only:
+#     - deploy
+# before_script:
+#   - chmod 755 build.sh
+# script:
+#   - npm run deploy
+# # notifications:
+# #   slack:
+# #     rooms:
+# #       - jweboytm:woLS6D9oasTaWyC1Ks4zqCne
+# #     on_success: change
+# #     on_failure: always
