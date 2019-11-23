@@ -1,14 +1,6 @@
 .history/
 .vscode/
-.idea/
-.next/
-.cache-loader/
-node_modules/
-
-dist/
-src/.DS_Store
 
 *.log
 *.lock
 
-npm-debug.*

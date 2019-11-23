@@ -1,14 +1,20 @@
-const path = require('path')
-const fs = require('fs')
+/*
+ * @Author: jweboy
+ * @Date: 2019-11-09 11:03:35
+ * @LastEditors: jweboy
+ * @LastEditTime: 2019-11-22 22:10:17
+ */
+const path = require('path');
+const fs = require('fs');
 
 // 项目根目录绝对路径 如: /Users/jweboy/WorkSpace/project/creams-web-new
-const appDirectory = fs.realpathSync(process.cwd())
+const appDirectory = fs.realpathSync(process.cwd());
 
-/** 
+/**
  * @param {string} relativePath 文件相对路径
  * @returns 基于根目录的完整文件绝对路径
 */
-const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
+const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
 module.exports = {
   appPath: resolveApp('.'),
@@ -21,5 +27,7 @@ module.exports = {
   appIndexHtml: resolveApp('index.html'),
   appDist: resolveApp('dist'),
   assetsPath: resolveApp('assets'),
-  appDistAssets: resolveApp('dist/assets')
-}
+  appDistAssets: resolveApp('dist/assets'),
+  appPublicPath: '/',
+  devEnvPath: resolveApp('.env.development'),
+};

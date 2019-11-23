@@ -1,0 +1,7 @@
+[production]
+cover 99.5%
+
+[development]
+last 1 chrome version
+last 1 Firefox version
+last 1 safari version
