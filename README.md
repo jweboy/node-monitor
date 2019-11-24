@@ -7,16 +7,17 @@
 请求分析
 
 - 列表页
-![请求列表](http://assets.jweboy.com/monitor-interface-list.png)
+![成功状态列表](http://assets.jweboy.com/monitor-interface-succeed.png)
+![失败状态列表](http://assets.jweboy.com/monitor-interface-failed.png)
 - 详情页
 ![请求详情](http://assets.jweboy.com/monitor-interface-detail.png)
 
 代码报错定位
 
 - 列表页
-![请求列表](http://assets.jweboy.com/monitor-error-exception-list.png)
+![请求列表](http://assets.jweboy.com/monitor-code-list.png)
 - 详情页
-![请求详情](http://assets.jweboy.com/monitor-error-exception-detail.png)
+![请求详情](http://assets.jweboy.com/monitor-code-detail.png)
 
 ## Future
 
