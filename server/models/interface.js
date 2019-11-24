@@ -6,13 +6,13 @@
  */
 import model from '../schema/interface';
 
-const create = (data) => {
+const createInterface = (data) => {
   return  model.create(data);
 };
 
 // https://www.jianshu.com/p/dbf965f8d314
 
-const findAll = async ({ status = ['failed'], keyword, methods = [], page = 1, size = 10 }) => {
+const findAllInterface = async ({ status = ['failed'], keyword, methods = [], page = 1, size = 10 }) => {
   const filters = {
     // 请求方法搜索（多选）
     ...(methods.length > 0 && {
@@ -39,7 +39,7 @@ const findAll = async ({ status = ['failed'], keyword, methods = [], page = 1, s
   return { list, total };
 };
 
-const findOne = (id) => {
+const findOneInterface = (id) => {
   return model.findById(id).exec();
 };
 
@@ -49,8 +49,8 @@ const findOne = (id) => {
 // 	.exec();
 
 export {
-  create,
-  findAll,
-  findOne,
+  createInterface,
+  findAllInterface,
+  findOneInterface,
   // performanceList,
 };

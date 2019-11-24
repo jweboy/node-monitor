@@ -1,24 +1,31 @@
 import model from '../schema/code';
 
-function create(data) {
+function createCode(data) {
   return model.create(data);
 }
 
-function findAll() {
-  return model.find();
+async function findAllCode() {
+  const list = await model.find()
+    .sort({ createAt: -1 })
+    .exec();
+  const total = await model.find()
+    .countDocuments()
+    .exec();
+
+  return { list, total };
 }
 
-function findOne(id) {
+function findOneCode(id) {
   return model.findById(id).exec();
 }
 
-function removeAll() {
+function removeAllCode() {
   return model.remove();
 }
 
 export {
-  create,
-  findAll,
-  findOne,
-  removeAll,
+  createCode,
+  findAllCode,
+  findOneCode,
+  removeAllCode,
 };

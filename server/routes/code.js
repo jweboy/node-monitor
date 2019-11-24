@@ -1,15 +1,18 @@
-import { findAll, findOne } from '../models/code';
+import { findAllCode, findOneCode } from '../models/code';
+import response from '../utils/response';
 
 async function getCodeList(ctx) {
   // const { page, size } = ctx.query;
+  const data = await findAllCode();
 
-  ctx.body = await findAll().sort({ createAt: -1 }).exec();
+  ctx.body = { ...response, data };
 }
 
 async function getCodeDetail(ctx) {
   const { id } = ctx.params;
+  const data = await findOneCode(id);
 
-  ctx.body = await findOne(id);
+  ctx.body = { ...response, data };
 }
 
 export {

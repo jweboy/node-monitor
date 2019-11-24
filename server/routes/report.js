@@ -6,8 +6,8 @@
  */
 // import Router from'koa-router';
 // import { logger } from'jweboy-utils';
-import interfaceModel from'../models/interface';
-import codeModel from'../models/code';
+import { createInterface } from'../models/interface';
+import { createCode } from'../models/code';
 
 // const router = new Router();
 
@@ -18,7 +18,7 @@ async function postInterface(ctx) {
   // const logMap = { succeed: 'info', failed: 'error' };
 
   // logger[logMap[status]](JSON.stringify(body));
-  ctx.body = await interfaceModel.create({
+  ctx.body = await createInterface({
     ...restProps,
     info: JSON.stringify(info),
     status,
@@ -28,7 +28,7 @@ async function postInterface(ctx) {
 async function postCode(ctx) {
   const { body } = ctx.request;
 
-  ctx.body = await codeModel.create(body);
+  ctx.body = await createCode.create(body);
 }
 
 export {

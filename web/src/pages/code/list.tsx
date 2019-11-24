@@ -22,6 +22,7 @@ const CodeList = () => {
   useEffect(() => {
     getCodeList()
       .then(({ data: { list } }) => {
+        console.log(data);
         setData(list);
       });
   }, []);

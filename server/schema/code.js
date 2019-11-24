@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const schema = new Schema({
-  createAt: { type: Date, default: Date.now },
+  create_time: { type: Date, default: Date.now },
   message: { type: String },
   lineNo: { type: Number },
   columnNo: { type: Number },
