@@ -1,19 +1,33 @@
-const compose = require('koa-compose');
-const glob = require('glob');
-const path = require('path');
+/*
+ * @Author: jweboy
+ * @Date: 2019-11-23 14:03:03
+ * @LastEditors: jweboy
+ * @LastEditTime: 2019-11-24 00:53:31
+ */
+import Router from 'koa-router';
+import { getInterfaceList, getInterfaceDetail } from './interface';
+import { getCodeList, getCodeDetail } from './code';
+import { postInterface, postCode } from './report';
+// import lookupSourceMap from '../utils/source-map';
 
-const registerRouter = () => {
-	const files = path.resolve(__dirname, '*.js');
-	const routers = [];
+const router = new Router();
 
-	glob.sync(files)
-		.filter((item) => item.indexOf('index.js') === -1)
-		.forEach((route) => {
-			routers.push(require(route).routes());
-		});
+function mainRoute(ctx) {
+  ctx.body = '监控系统API服务';
+}
 
-	return compose(routers);
-};
+router
+  .prefix('/api')
+  .get('/', mainRoute)
+  .get('/interface', getInterfaceList)
+  .get('/interface/:id', getInterfaceDetail)
+  .get('/code', getCodeList)
+  .get('/code/:id', getCodeDetail)
+  .post('/report/interface', postInterface)
+  .post('/report/code', postCode);
+// .delete('/api/error-exception', async (ctx) => {
+// 	await errorException.removeAll();
+// 	ctx.body = '';
+// });
 
-// registerRouter();
-module.exports = registerRouter;
+export default router;
