@@ -1,0 +1,8 @@
+{
+  "exec": "node --experimental-modules --es-module-specifier-resolution=node ./app.js",
+  "watch": ["."],
+  "ignore": [
+    "node_modules/**/node_modules"
+  ],
+  "ext": "js"
+}

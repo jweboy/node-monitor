@@ -2,7 +2,7 @@
 
 # step1
 # 使用生产环境镜像 alpine
-FROM node:10.15.3-alpine AS builder
+FROM mhart/alpine-node:12 AS builder
 
 # 创建项目目录
 WORKDIR /usr/src/app
@@ -17,7 +17,7 @@ COPY package*.json ./
 RUN npm install -d --registry=https://registry.npm.taobao.org
 
 # step2
-FROM node:10.15.3-alpine
+FROM mhart/alpine-node:12
 
 # 指定项目目录
 WORKDIR /usr/src/app
@@ -32,11 +32,12 @@ COPY --from=builder /usr/src/app/node_modules ./node_modules
 COPY . .
 
 # 全局变量
-ENV SERVER_HOST=jweboy.com
+# ENV SERVER_HOST=jweboy.com
+ENV SERVER_HOST=127.0.0.1
 ENV SERVER_PROTOCOL=http
-ENV SERVER_PORT=4004
+ENV SERVER_PORT=4000
 ENV DB_HOST=mongo-service
 ENV NODE_ENV=production
 
 # 运行 server
-CMD ["node", "app.js"]
+CMD ["node", "-experimental-modules", "--es-module-specifier-resolution=node", "app.js"]

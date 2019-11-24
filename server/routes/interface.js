@@ -1,28 +1,37 @@
-const Router = require('koa-router');
-// const { reportList, reportDetail } = require('../models/interface');
-// const app = require('../server');
+/*
+ * @Author: jweboy
+ * @Date: 2019-11-23 14:03:03
+ * @LastEditors: jweboy
+ * @LastEditTime: 2019-11-24 00:54:06
+ */
+// import Router from'koa-router';
+// const router = new Router();
+import { findAll, findOne } from'../models/interface';
 
-const router = new Router();
 
-// async function renderList(ctx) {
-// 	const list = await reportList({ status: 'failed' });
+async function getInterfaceList(ctx) {
+  const { status = 'failed', keyword = '', method = '', page, size } = ctx.query;
 
-// 	ctx.status = 200;
-// 	await app.render(ctx.req, ctx.res, '/interface/list', { list });
-// 	ctx.respond = false;
-// 	ctx.body = 'hello';
-// }
+  ctx.body = await findAll({
+    methods: method !== '' ? method.split(',') : [],
+    status: status !== '' ? status.split(',') : [],
+    keyword: keyword !== '' ? keyword.replace(/\//g, '\\/') : keyword,
+    page,
+    size,
+  });
+}
 
-// async function renderDetail(ctx) {
-// 	const { id } = ctx.params;
-// 	const detail = await reportDetail(id);
+async function getInterfaceDetail(ctx) {
+  const { id } = ctx.params;
 
-// 	ctx.status = 200;
-// 	await app.render(ctx.req, ctx.res, '/interface/detail', detail);
-// 	ctx.respond = false;
-// }
+  ctx.body = await findOne(id);
+}
 
-// router.get('/interface', renderList);
+// router
+// .get('/api/a', getInterfaceList);
 // router.get('/interface/:id', renderDetail);
 
-module.exports = router;
+export {
+  getInterfaceList,
+  getInterfaceDetail,
+};
