@@ -20,7 +20,7 @@
     "deploy": "./build.sh"
   },
   "dependencies": {
-    "@koa/cors": "3.0.0",
+    "@koa/cors": "5.0.0",
     "@types/koa": "^2.0.52",
     "@types/node": "^12.12.12",
     "antd": "3.19.6",
